@@ -82,14 +82,15 @@ CREATE TABLE composite_prompt_prompt_fragment (
     )
 );
 
--- Fill the tables with some initial data
 INSERT INTO
     author (name)
-VALUES ('Roald Sap'),
-    ('Mark van der Veen'),
-    ('Akshay Dhondai'),
-    ('Adil Harhour');
+VALUES ('OneSirJar'),
+    ('Smileanimations'),
+    ('Akshay12184'),
+    ('Aharhour');
 
+-- Do not forget to add our own prompts and prompt fragments here!
+-- For now, these are placeholders made by Ties (wrongly credited under OneSirJar's author id atm) that will eventually be replaced.
 INSERT INTO
     prompt_fragment (
         author_id,
@@ -117,6 +118,7 @@ VALUES (
         'JavaScript exercise: find the most common value in an array.'
     );
 
+--To do: maybe add some more tags here, in case the above prompts don't strictly fit in any of these three.
 INSERT INTO
     tag (name)
 VALUES ('coding'),
