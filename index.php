@@ -1,9 +1,8 @@
 <?php 
 include_once('connection.php');
 
-
-$query = $conn->query("SELECT * FROM `composite_prompt`");
-$prompts = $query->fetchAll(PDO::FETCH_ASSOC);
+$query = $conn->query("SELECT * FROM tag");
+$tags = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -16,16 +15,23 @@ $prompts = $query->fetchAll(PDO::FETCH_ASSOC);
     <script src="script.js"></script>
 </head>
 <body>
-
-<div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="Search here...">
-    <button onclick="performSearch()" class="search-button">Search</button>
-</div>
 <div>
-    <?php foreach ($prompts as $index => $prompt) {?>
-        <h1><?= $prompt['title']?></h1>
-        <p><?= $prompt['description']?></p>
+    <?php foreach ($tags as $index => $tag) {
+        if (!isset($_POST['_submit'])) {?>
+        <form method="post">
+            <button name="<?= $id = $tag['id'];?>" value="<?= $tag['id']?>" type="submit"><?= $tag['name']?></button>
+        </form>
+    <?php }}?>
+</div>
+<?php foreach ($_POST as $id) {
+    $query = $conn->query("SELECT p.content as title, p.description as description FROM prompt_fragment p JOIN prompt_fragment_tag pt ON p.id = pt.prompt_fragment_id JOIN tag t ON t.id = pt.tag_id WHERE t.id =" . $id);
+    $tagposts = $query->fetchAll(PDO::FETCH_ASSOC);?>
+<div>
+    <?php foreach ($tagposts as $index => $posts) {?>
+        <h1><?= $posts['title']?></h1>
+        <p><?= $posts['description']?></p>
     <?php }?>
 </div>
+<?php }?>
 </body>
 </html>
