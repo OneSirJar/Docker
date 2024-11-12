@@ -1,12 +1,12 @@
 function FetchApi() {
-    fetch = ('')
+    fetch = ('http://localhost:8000/prompt_fragments')
 }
 function performSearch() {
     const query = document.getElementById('searchInput').value;
     if (query) {
-        alert('You searched for: ' + query);
+        alert('je hebt dit opgezocht:  ' + query);
     } else {
-        alert('Please enter a search term');
+        alert('vul een zoekterm in');
     }
 }
 
